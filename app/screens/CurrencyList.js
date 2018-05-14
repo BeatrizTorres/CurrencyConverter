@@ -1,23 +1,28 @@
-import React, {Component} from 'react';
-import {FlatList, StatusBar, View} from 'react-native';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { FlatList, StatusBar, View } from 'react-native';
 
 import currencies from '../data/currencies';
-import {ListItem} from '../components/List';
+import { ListItem } from '../components/List';
 
 const TEMP_CURRENT_CURRENCY = 'CAD';
 
 class CurrencyList extends Component {
-  handlePress = () => {
-    console.log ('row press');
+  static propTypes = {
+    navigation: PropTypes.object,
   };
 
-  render () {
+  handlePress = () => {
+    this.props.navigation.goBack(null);
+  };
+
+  render() {
     return (
       <View>
         <StatusBar translucent={false} barStyle="default" />
         <FlatList
           data={currencies}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <ListItem
               text={item}
               selected={item === TEMP_CURRENT_CURRENCY}
@@ -32,3 +37,4 @@ class CurrencyList extends Component {
 }
 
 export default CurrencyList;
+
